@@ -22,9 +22,27 @@ int conv(int resp, int opcao) {
     return numero;
 }
 
+void convHex(int num) {
+    int hex[32];
+    int cont = 0;
+
+    while (num > 0) {
+        hex[cont] = num % 16;
+        num = num / 16;
+        cont++;
+    }
+    for (int inversor = cont - 1; inversor >= 0; inversor--) {
+        if (hex[inversor] < 10) {
+            printf("%d", hex[inversor]);
+        } else {
+            printf("%c", hex[inversor] + 55);
+        }
+    }
+}
+
 
 int main(){
-printf("Maria Fernanda Suruagy Ordonho - 3A (Última atualização = 28/08/2024 - 12:07)\n1.a(11:55)\n1.b(12:07)\n1.c(Não feito)\n1.d(Não feito)\n2(Não feito)\n3(Não feito)\n");
+printf("Maria Fernanda Suruagy Ordonho - 3A (Última atualização = 28/08/2024 - 14:25)\n1.a(11:55)\n1.b(12:07)\n1.c(14:25)\n1.d(Não feito)\n2(Não feito)\n3(Não feito)\n");
   
   printf("\n\n----CALCULADORA DE CONVERSÃO----\n\nEscolha uma opção:\n(1)Base 10 --> Base 2\n(2)Base 10 --> base 8\n(3)Base 10 --> base 16\n(4)Base 10 --> Código BCD\n(5)Base 10 --> Complemento a 2\n(6)Decimal --> Float e Double\n\n");
 
@@ -44,11 +62,14 @@ printf("Maria Fernanda Suruagy Ordonho - 3A (Última atualização = 28/08/2024 
     printf("%d em base8 = %d",n,conv(n, 8));
   }
   else if(opt==3){
-   
+   printf("Digite um número: ");
+        scanf("%d",&n);
+        printf("%d em base16 = ",n);
+        convHex(n);
   }
     
   else if(opt==4){
-    
+      
   }
   else if(opt==5){
     
