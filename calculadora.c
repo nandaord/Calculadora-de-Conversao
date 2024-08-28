@@ -40,9 +40,44 @@ void convHex(int num) {
     }
 }
 
+void convBCD(int n) {
+    int temp = n;
+    int tam = 0;
+    while(temp != 0) {
+        temp /= 10;
+        tam++;
+    }
+
+    int bcd[tam];
+    temp = n;
+
+    for(int i = tam - 1; i >= 0; i--) {
+        int digit = temp % 10;
+        bcd[i] = digit;
+        temp /= 10;
+    }
+
+    for(int i = 0; i < tam; i++) {
+        switch(bcd[i]) {
+            case 0: printf("0000 "); break;
+            case 1: printf("0001 "); break;
+            case 2: printf("0010 "); break;
+            case 3: printf("0011 "); break;
+            case 4: printf("0100 "); break;
+            case 5: printf("0101 "); break;
+            case 6: printf("0110 "); break;
+            case 7: printf("0111 "); break;
+            case 8: printf("1000 "); break;
+            case 9: printf("1001 "); break;
+        }
+    }
+    printf("\n");
+}
+
+
 
 int main(){
-printf("Maria Fernanda Suruagy Ordonho - 3A (Última atualização = 28/08/2024 - 14:25)\n1.a(11:55)\n1.b(12:07)\n1.c(14:25)\n1.d(Não feito)\n2(Não feito)\n3(Não feito)\n");
+printf("Maria Fernanda Suruagy Ordonho - 3A (Última atualização = 28/08/2024 - 14:31)\n1.a(11:55)\n1.b(12:07)\n1.c(14:25)\n1.d(14:31)\n2(Não feito)\n3(Não feito)\n");
   
   printf("\n\n----CALCULADORA DE CONVERSÃO----\n\nEscolha uma opção:\n(1)Base 10 --> Base 2\n(2)Base 10 --> base 8\n(3)Base 10 --> base 16\n(4)Base 10 --> Código BCD\n(5)Base 10 --> Complemento a 2\n(6)Decimal --> Float e Double\n\n");
 
@@ -69,8 +104,12 @@ printf("Maria Fernanda Suruagy Ordonho - 3A (Última atualização = 28/08/2024 
   }
     
   else if(opt==4){
-      
+      printf("Digite um número: ");
+      scanf("%d",&n);
+      printf("%d em BCD = ",n);
+      convBCD(n);
   }
+      
   else if(opt==5){
     
   }
