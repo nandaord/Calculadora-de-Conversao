@@ -37,7 +37,7 @@ char* conv(int resp, int opcao) {
         binario[cont - 1 - i] = temp;
     }
 
-    printf("\nResultado final da parte inteira: %s\n", binario);
+    printf("\nResultado final da parte inteira: %s\n\n", binario);
     return binario;
 }
 
@@ -65,24 +65,51 @@ char* convDecimal(double decimal, int n) {
 }
 }
 
-void convHex(int num) {
-    int hex[32];
-    int cont = 0;
-
-    while (num > 0) {
-        hex[cont] = num % 16;
-        printf("Dividindo %d por 16, temos resto %d.\n", num, hex[cont]);
-        num = num / 16;
-        cont++;
-    }
-    for (int inversor = cont - 1; inversor >= 0; inversor--) {
-        if (hex[inversor] < 10) {
-            printf("%d", hex[inversor]);
-        } else {
-            printf("%c", hex[inversor] + 55);
+void intToHex(int num, char* hexStr) {
+    const char hexDigits[] = "0123456789ABCDEF";
+    int i = 0;
+    int j;
+    char temp[20]; 
+    
+    if (num == 0) {
+        hexStr[i++] = '0';
+    } else {
+        while (num > 0) {
+            temp[i++] = hexDigits[num % 16];
+            num /= 16;
         }
+
+        for (j = 0; j < i; j++) {
+            hexStr[j] = temp[i - j - 1];
+        }
+        hexStr[i] = '\0';
     }
-    printf("\n");
+}
+
+void decimalToHex(double decimal, char* hexStr) {
+    const char hexDigits[] = "0123456789ABCDEF";
+    int i = 0;
+
+    hexStr[i++] = '.';
+    while (decimal > 0.0 && i < 20) {  
+        decimal *= 16.0;
+        int intPart = (int)decimal;
+        hexStr[i++] = hexDigits[intPart];
+        decimal -= intPart;
+    }
+    hexStr[i] = '\0';
+}
+
+void doubleToHex(double value, char* hexStr) {
+    int intPart = (int)value;
+    double decimalPart = value - intPart;
+    char intHex[20] = {0};
+    char decHex[20] = {0};
+
+    intToHex(intPart, intHex);
+    decimalToHex(decimalPart, decHex);
+
+    sprintf(hexStr, "%s%s", intHex, decHex);
 }
 
 void convBCD(int n) {
@@ -169,7 +196,7 @@ void binariotonotacao(int sinal, const char *binario, char *notacao, int *expoen
 }
 
 int main() {
-    printf("Maria Fernanda Suruagy Ordonho - 3A (Última atualização = 30/08/2024-18:42)\n1.a(30/08-18:11)\n1.b(30/08-18:42)\n1.c(28/08-14:25)\n1.d(28/08-14:31)\n2(28/08-14:49)\n3(30/08-15:45)\n");
+    printf("Maria Fernanda Suruagy Ordonho - 3A (Última atualização = 30/08/2024-20:46)\n1.a(30/08-18:11)\n1.b(30/08-18:42)\n1.c(30/08-20:46)\n1.d(28/08-14:31)\n2(28/08-14:49)\n3(30/08-15:45)\n");
 
     printf("\n\n----CALCULADORA DE CONVERSÃO----\n\nEscolha uma opção:\n(1) Base 10 --> Base 2\n(2) Base 10 --> Base 8\n(3) Base 10 --> Base 16\n(4) Base 10 --> Código BCD\n(5) Base 10 --> Complemento a 2\n(6) Decimal --> Float e Double\n\n");
 
@@ -181,6 +208,7 @@ int main() {
     if(opt == 1) {
         printf("Digite um número: ");
         scanf("%lf", &n);
+        printf("\n");
 
         if (n<0){
             printf("Entrada apenas de números positivos!");
@@ -205,6 +233,7 @@ int main() {
         if(opt == 2) {
             printf("Digite um número: ");
             scanf("%lf", &n);
+            printf("\n");
 
             if (n<0){
                 printf("Entrada apenas de números positivos!");
@@ -228,10 +257,26 @@ int main() {
         }
         
     } else if(opt == 3) {
-        printf("Digite um número: ");
-        scanf("%lf", &n);
-        printf("Resultado da conversão de %lf para base 16: ", n);
-        convHex(n);
+
+            printf("Digite um número: ");
+                scanf("%lf", &n);
+            printf("\n");
+
+                if (n<0){
+                    printf("Entrada apenas de números positivos!");
+                } 
+                else if (n==0){
+                    printf("\n0 em base 16 (hexadecimal) = 0");
+                }
+                else {
+                char hexStr[50];
+
+                doubleToHex(n, hexStr);
+
+                printf("%lf em base 16 (hexadecimal) = %s\n",n,hexStr);
+
+            }
+            
     } else if(opt == 4) {
         printf("Digite um número: ");
         scanf("%lf", &n);
@@ -258,8 +303,6 @@ int main() {
             char *binario = conv(n, 2);
             binariotonotacao(0, binario, notacao, &expoente);
         }
-    } else {
-        printf("Opção inválida!\n");
     }
     return 0;
 }
