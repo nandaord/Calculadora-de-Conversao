@@ -21,8 +21,6 @@ char* conv(int resp, int opcao) {
     int cont = 0;
     int resto;
 
-    printf("\nCálculo da parte inteira:\n");
-    
     while (resp > 0) {
         resto = resp % opcao;
         printf("%d %% %d = (%d)\n", resp, opcao, resto);
@@ -50,7 +48,7 @@ char* convDecimal(double decimal, int n) {
         printf("Erro ao alocar memória.\n");
         return NULL;
     } else {
-    printf("\nCálculo da parte decimal:\n");
+        
     int i = 1;
     resultado[0] = '.';
     while (decimal > 0 && i < 63) {
@@ -171,7 +169,7 @@ void binariotonotacao(int sinal, const char *binario, char *notacao, int *expoen
 }
 
 int main() {
-    printf("Maria Fernanda Suruagy Ordonho - 3A (Última atualização = 30/08/2024-18:11)\n1.a(30/08-18:12)\n1.b(28/08-12:07)\n1.c(28/08-14:25)\n1.d(28/08-14:31)\n2(28/08-14:49)\n3(30/08-15:45)\n");
+    printf("Maria Fernanda Suruagy Ordonho - 3A (Última atualização = 30/08/2024-18:42)\n1.a(30/08-18:11)\n1.b(30/08-18:42)\n1.c(28/08-14:25)\n1.d(28/08-14:31)\n2(28/08-14:49)\n3(30/08-15:45)\n");
 
     printf("\n\n----CALCULADORA DE CONVERSÃO----\n\nEscolha uma opção:\n(1) Base 10 --> Base 2\n(2) Base 10 --> Base 8\n(3) Base 10 --> Base 16\n(4) Base 10 --> Código BCD\n(5) Base 10 --> Complemento a 2\n(6) Decimal --> Float e Double\n\n");
 
@@ -204,12 +202,30 @@ int main() {
         free(resultadodecimal);
         
     }}
-    else if(opt == 2) {
-        printf("Digite um número: ");
-        scanf("%lf", &n);
-        char* resultado = conv(n, 8);
-        printf("Resultado da conversão de %lf para base 8: %s\n", n, resultado);
-        free(resultado);
+        if(opt == 2) {
+            printf("Digite um número: ");
+            scanf("%lf", &n);
+
+            if (n<0){
+                printf("Entrada apenas de números positivos!");
+            } 
+            else if (n==0){
+                printf("\n0 em base 8 (octal) = 0");
+            }
+            else {
+            int parteinteira = (int)n;
+            double partedecimal = n-parteinteira;
+
+            char* resultadointeiro = conv(parteinteira, 8);
+
+            char* resultadodecimal = convDecimal(partedecimal,8);
+            if(resultadointeiro != NULL) {
+                printf("\n%lf em base 2 (octal) = %s%s\n", n, resultadointeiro, resultadodecimal);
+            }
+            free(resultadointeiro);
+            free(resultadodecimal);
+
+        }
         
     } else if(opt == 3) {
         printf("Digite um número: ");
