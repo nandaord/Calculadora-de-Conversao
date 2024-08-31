@@ -112,39 +112,24 @@ void doubleToHex(double value, char* hexStr) {
     sprintf(hexStr, "%s%s", intHex, decHex);
 }
 
-void convBCD(int n) {
-    int temp = n;
-    int tam = 0;
-    while(temp != 0) {
-        temp /= 10;
-        tam++;
-    }
+void convBCD(char *string) {
 
-    int bcd[tam];
-    temp = n;
-
-    for(int i = tam - 1; i >= 0; i--) {
-        int digit = temp % 10;
-        printf("Separando dígito: %d\n", digit);
-        bcd[i] = digit;
-        temp /= 10;
+    int tam = strlen(string);
+    for(int i=0; i<tam; i++){
+       switch (string[i]){
+           case '0': printf("0000 "); break;
+           case '1': printf("0001 "); break;
+           case '2': printf("0010 "); break;
+           case '3': printf("0011 "); break;
+           case '4': printf("0100 "); break;
+           case '5': printf("0101 "); break;
+           case '6': printf("0110 "); break;
+           case '7': printf("0111 "); break;
+           case '8': printf("1000 "); break;
+           case '9': printf("1001 "); break; 
+           case '.': printf(". ");break;
+       } 
     }
-
-    for(int i = 0; i < tam; i++) {
-        switch(bcd[i]) {
-            case 0: printf("0000 "); break;
-            case 1: printf("0001 "); break;
-            case 2: printf("0010 "); break;
-            case 3: printf("0011 "); break;
-            case 4: printf("0100 "); break;
-            case 5: printf("0101 "); break;
-            case 6: printf("0110 "); break;
-            case 7: printf("0111 "); break;
-            case 8: printf("1000 "); break;
-            case 9: printf("1001 "); break;
-        }
-    }
-    printf("\n");
 }
 
 void convComp2(int n){
@@ -196,7 +181,7 @@ void binariotonotacao(int sinal, const char *binario, char *notacao, int *expoen
 }
 
 int main() {
-    printf("Maria Fernanda Suruagy Ordonho - 3A (Última atualização = 30/08/2024-20:46)\n1.a(30/08-18:11)\n1.b(30/08-18:42)\n1.c(30/08-20:46)\n1.d(28/08-14:31)\n2(28/08-14:49)\n3(30/08-15:45)\n");
+    printf("Maria Fernanda Suruagy Ordonho - 3A (Última atualização = 30/08-21:46)\n1.a(30/08-18:11)\n1.b(30/08-18:42)\n1.c(30/08-20:46)\n1.d(30/08-21:46)\n2(28/08-14:49)\n3(30/08-15:45)\n");
 
     printf("\n\n----CALCULADORA DE CONVERSÃO----\n\nEscolha uma opção:\n(1) Base 10 --> Base 2\n(2) Base 10 --> Base 8\n(3) Base 10 --> Base 16\n(4) Base 10 --> Código BCD\n(5) Base 10 --> Complemento a 2\n(6) Decimal --> Float e Double\n\n");
 
@@ -278,11 +263,25 @@ int main() {
             }
             
     } else if(opt == 4) {
-        printf("Digite um número: ");
-        scanf("%lf", &n);
-        printf("Resultado da conversão de %lf para código BCD: ", n);
-        convBCD(n);
-    } else if(opt == 5) {
+
+            char string[30];
+            printf("Digite um número: ");
+                scanf("%29s", string);
+            printf("\n");
+
+                if (n<0){
+                    printf("Entrada apenas de números positivos!");
+                } 
+                else if (n==0){
+                    printf("\n0 em base 16 (hexadecimal) = 0");
+                }
+                else {
+
+                convBCD(string);   
+                }
+                
+        } else if(opt == 5) {
+            
         printf("Digite um número: ");
         scanf("%lf", &n);
         if(n > 0) {
@@ -291,6 +290,7 @@ int main() {
             printf("Resultado da conversão de %lf para complemento a 2: ", n);
             convComp2(n);
         }
+            
     } else if(opt == 6) {
         char notacao[50];
         int expoente;
