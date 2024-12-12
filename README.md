@@ -7,18 +7,18 @@ Este projeto tem como objetivo implementar uma calculadora didática de convers�
 A calculadora realiza as seguintes conversões:
 
 1. **Conversão de Base 10 para:**
-   - 🔢 Base 2 (binário)
-   - 🔢 Base 8 (octal)
-   - 🔢 Base 16 (hexadecimal)
-   - 💾 Código BCD (Binary-Coded Decimal)
+   -  Base 2 (binário)
+   -  Base 8 (octal)
+   -  Base 16 (hexadecimal)
+   -  Código BCD (Binary-Coded Decimal)
    
 2. **Conversão de Base 10 para Base com Sinal (Complemento a 2, 16 bits)**
 
 3. **Conversão de número real decimal para o formato float e double, mostrando:**
-   - ⚙️ Bits de sinal
-   - 📏 Expoente
-   - 📐 Expoente com viés
-   - 🔢 Fração
+   -  Bits de sinal
+   -  Expoente
+   -  Expoente com viés
+   -  Fração
 
 ## 🖥️ Como Executar
 
