@@ -22,7 +22,7 @@ A calculadora realiza as seguintes conversões:
 
 ## 🖥️ Como Executar
 
-1. Baixe o código fonte do repositório [aqui](link_do_git).
+1. Baixe o código fonte do repositório aqui.
 2. Compile o código com um compilador C, como o GCC:
    ```bash
    gcc calculadora_conversao.c -o calculadora_conversao
